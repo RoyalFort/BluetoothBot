@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BotCarServer</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_configure">ConfigureActivity</string>
+    <string name="title_activity_configure_bluetooth">ConfigureBluetooth</string>
+    <string name="html_layout">
+        <![CDATA[
+       	<html>
+       		<head>
+       			<title>Video Bot</title>
+       		</head>
+       		<body>
+       			{body}
+				{script}
+       		</body>
+       	</html>
+        ]]>
+    </string>
+    <string name="html_controls">
+        <![CDATA[
+        <div style=\"text-align:center\">
+	        <div><button id=\"btnForward3\">^^^</button></div>
+	        <div><button id=\"btnForward2\">^^</button></div>
+	        <div><button id=\"btnForward1\">^</button></div>
+	        <div>
+	            <button id=\"btnLeft3\">&lt;&lt&lt</button>
+	            <button id=\"btnLeft2\">&lt&lt</button>
+	            <button id=\"btnLeft1\">&lt</button>
+	            <button id=\"btnRight1\">&gt;</button>
+	            <button id=\"btnRight2\">&gt;&gt;</button>
+	            <button id=\"btnRight3\">&gt;&gt;&gt;</button>    
+	        </div>
+	        <div><button id=\"btnBackward1\">v</button></div>
+	        <div><button id=\"btnBackward2\">vv</button></div>
+	        <div><button id=\"btnBackward3\">vvv</button></div>
+        </div>
+        <div>
+        	<iframe src=\"http://192.168.1.120:8888/browser.html\" style=\"width:80%; height: 500px;\"></iframe>
+        </div>
+		<br />
+		<span>BT Command:</span>
+		<pre id=\"command\"></pre>
+        ]]>
+    </string>
+    <string name="html_script">
+        <![CDATA[
+        <script src=\"http://code.jquery.com/jquery-1.10.2.min.js\"></script>
+        <script>
+        	function go(dir, dur) {
+	        	$.get(\"?dir=\" + dir + \"&duration=\" + dur + \"&speed=255\", function(data) {
+		        		$(\"#command\").text(JSON.stringify(data));
+		        	});
+        	}
+        	$(\"#btnForward1\").click(function() { go(\"F\", 3); });
+        	$(\"#btnForward2\").click(function() { go(\"F\", 10); });
+        	$(\"#btnForward3\").click(function() { go(\"F\", 20); });
+        	$(\"#btnBackward1\").click(function() { go(\"B\", 3); });
+        	$(\"#btnBackward2\").click(function() { go(\"B\", 10); });
+        	$(\"#btnBackward3\").click(function() { go(\"B\", 20); });
+        	$(\"#btnLeft1\").click(function() { go(\"L\", 3); });
+        	$(\"#btnLeft2\").click(function() { go(\"L\", 10); });
+        	$(\"#btnLeft3\").click(function() { go(\"L\", 20); });
+        	$(\"#btnRight1\").click(function() { go(\"R\", 3); });
+        	$(\"#btnRight2\").click(function() { go(\"R\", 10); });
+        	$(\"#btnRight3\").click(function() { go(\"R\", 20); });
+        </script>
+        ]]>
+    </string>
+
+</resources>
