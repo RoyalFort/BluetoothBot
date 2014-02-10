@@ -1,2 +1,0 @@
-test
-royal's test
