@@ -29,6 +29,7 @@ int commandDelay = 20;
 // o = option-set mode
 
 char mode = 'd';
+char option;
 
 void setup() {
 	// Open serial communications and wait for port to open:
@@ -46,28 +47,35 @@ void setup() {
 
 void loop() {
 	
-	byte read = 0;
-	if (mySerial.available()) read = mySerial.read();
+	// Don't do anything unless there was input from the user
+	if (mySerial.available()) {
 	
-	switch (mode) {
+		byte read = mySerial.read();
+		Serial.write(read);
 		
-		// Drive (d) mode by default
-		case 'd': driveCommand(read); break;
-		case 'c':
-		case 'o': config(read) break;
-		// If something weird happens and mode isn't a valid 
-		// value, put everything back into drive mode
-		default: mode = 'd'; 
+		// If user presses c, enter config mode and go to next loop of void loop()
+		if(read == 'c') {
+			mode = 'c';
+			return;
+		}
 		
+		switch (mode) {
+			case 'd': driveCommand(read); break;
+			case 'o': optionSet(read); break;
+			case 'c': config(read); break;
+		}
 	}
+}
 
-	switch (read) {
+void optionSet(byte read) {
+	if(option == 'v') if (read > 0 && read < 255) velocity = read;
+	
+	mode = 'd'; // Go back to drive mode once the selected option is set
+}
 
-		default: {
-			Serial.print("Set speed: ");
-			if (read > 0 && read < 255) velocity = read;
-		} break;
-	}
+void config(byte read) {
+	option = read; // Keep track of what option is going to be set
+	mode = 'o'; // Put the program into option-set mode
 }
 
 void driveCommand(byte read) {
