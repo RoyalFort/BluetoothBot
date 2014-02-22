@@ -117,37 +117,37 @@ void driveCommand(byte read) {
 }
 
 void goFwd() {
-Serial.println("Forward");
-analogWrite(leftFwd, velocity);
-analogWrite(rightFwd, velocity);
-delay(commandDelay);
-analogWrite(leftFwd, 0);
-analogWrite(rightFwd, 0);
+	Serial.println("Forward");
+	analogWrite(leftFwd, velocity);
+	analogWrite(rightFwd, velocity);
+	delay(commandDelay);
+	analogWrite(leftFwd, 0);
+	analogWrite(rightFwd, 0);
 }
 
 void goBack() {
-Serial.println("Backward");
-analogWrite(leftRev, velocity);
-analogWrite(rightRev, velocity);
-delay(commandDelay);
-analogWrite(leftRev, 0);
-analogWrite(rightRev, 0);
+	Serial.println("Backward");
+	analogWrite(leftRev, velocity);
+	analogWrite(rightRev, velocity);
+	delay(commandDelay);
+	analogWrite(leftRev, 0);
+	analogWrite(rightRev, 0);
 }
 
 void goLeft() {
-Serial.println("Left");
-analogWrite(leftRev, velocity);
-analogWrite(rightFwd, velocity);
-delay(commandDelay);
-analogWrite(leftRev, 0);
-analogWrite(rightFwd, 0);
+	Serial.println("Left");
+	analogWrite(leftRev, velocity);
+	analogWrite(rightFwd, velocity);
+	delay(commandDelay);
+	analogWrite(leftRev, 0);
+	analogWrite(rightFwd, 0);
 }
 
 void goRight() {
-Serial.println("Right");
-analogWrite(leftFwd, velocity);
-analogWrite(rightRev, velocity);
-delay(commandDelay);
-analogWrite(leftFwd, 0);
-analogWrite(rightRev, 0);
+	Serial.println("Right");
+	analogWrite(leftFwd, velocity);
+	analogWrite(rightRev, velocity);
+	delay(commandDelay);
+	analogWrite(leftFwd, 0);
+	analogWrite(rightRev, 0);
 }
